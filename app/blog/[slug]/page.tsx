@@ -40,19 +40,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords: post.keywords,
     authors: [{ name: post.author.name }],
     alternates: {
-      canonical: `https://kdmultimedia.in/blog/${post.slug}`,
+      canonical: `https://www.kdmultimedia.in/blog/${post.slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.metaDesc,
-      url: `https://kdmultimedia.in/blog/${post.slug}`,
+      url: `https://www.kdmultimedia.in/blog/${post.slug}`,
       siteName: 'KD MULTIMEDIA',
       type: 'article',
       publishedTime: post.publishedDate,
       authors: [post.author.name],
       images: [
         {
-          url: 'https://kdmultimedia.in/og-image.jpg',
+          url: 'https://www.kdmultimedia.in/og-image.jpg',
           width: 1200,
           height: 630,
           alt: post.title,
@@ -76,12 +76,12 @@ export default async function BlogPostPage({ params }: PageProps) {
     '@graph': [
       {
         '@type': 'BlogPosting',
-        '@id': `https://kdmultimedia.in/blog/${post.slug}#article`,
+        '@id': `https://www.kdmultimedia.in/blog/${post.slug}#article`,
         headline: post.title,
         description: post.metaDesc,
         datePublished: post.publishedDate,
         dateModified: post.publishedDate,
-        mainEntityOfPage: `https://kdmultimedia.in/blog/${post.slug}`,
+        mainEntityOfPage: `https://www.kdmultimedia.in/blog/${post.slug}`,
         author: {
           '@type': 'Person',
           name: post.author.name,
@@ -90,13 +90,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         publisher: {
           '@type': 'Organization',
           name: 'KD Multimedia Productions',
-          url: 'https://kdmultimedia.in',
+          url: 'https://www.kdmultimedia.in',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://kdmultimedia.in/kd-symbol.png',
+            url: 'https://www.kdmultimedia.in/kd-symbol.png',
           },
         },
-        image: 'https://kdmultimedia.in/og-image.jpg',
+        image: 'https://www.kdmultimedia.in/og-image.jpg',
         keywords: post.keywords.join(', '),
       },
       {
@@ -106,19 +106,19 @@ export default async function BlogPostPage({ params }: PageProps) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://kdmultimedia.in',
+            item: 'https://www.kdmultimedia.in',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Insights & Blog',
-            item: 'https://kdmultimedia.in/blog',
+            item: 'https://www.kdmultimedia.in/blog',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: post.title,
-            item: `https://kdmultimedia.in/blog/${post.slug}`,
+            item: `https://www.kdmultimedia.in/blog/${post.slug}`,
           },
         ],
       },

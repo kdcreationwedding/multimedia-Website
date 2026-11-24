@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kdmultimedia.in'),
+  metadataBase: new URL('https://www.kdmultimedia.in'),
   title: 'KD MULTIMEDIA — 8K Cinematography, Video Production & Meta Ads Agency Ahmedabad',
   description:
     'KD MULTIMEDIA is Ahmedabad’s premier 8K cinema production and performance marketing agency. Specializing in commercial video shooting, Adobe Creative Suite editing (Premiere Pro & After Effects), Meta & Google ads, 3D animations, and luxury destination weddings (KD Creation). Call: +91 70165 63129.',
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
     'Fashion Photography Studio Ahmedabad',
   ],
   authors: [
-    { name: 'Mr. Mahesh', url: 'https://kdmultimedia.in' },
+    { name: 'Mr. Mahesh', url: 'https://www.kdmultimedia.in' },
     { name: 'Mr. Harshad Chavda' },
     { name: 'Mr. Aniket Vaghela' },
   ],
   creator: 'KD MULTIMEDIA Productions',
   publisher: 'KD MULTIMEDIA Productions & Marketing',
   alternates: {
-    canonical: 'https://kdmultimedia.in',
+    canonical: 'https://www.kdmultimedia.in',
   },
   verification: {
     google: 'sNiOkkjJDtkFA8enRV9OO49mwq7C1CY5E7ltnPZi-Og',
@@ -73,13 +73,13 @@ export const metadata: Metadata = {
     title: 'KD MULTIMEDIA — 8K Cinematography, Production & Performance Marketing Agency Ahmedabad',
     description:
       'Ultra-premium 8K cinema production, Adobe Creative Suite post-production, high-ROAS Meta & Google ads, and luxury destination weddings in Ahmedabad, Gujarat. Phone: +91 70165 63129.',
-    url: 'https://kdmultimedia.in',
+    url: 'https://www.kdmultimedia.in',
     siteName: 'KD MULTIMEDIA',
     locale: 'en_IN',
     type: 'website',
     images: [
       {
-        url: 'https://kdmultimedia.in/og-image.jpg',
+        url: 'https://www.kdmultimedia.in/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'KD MULTIMEDIA Productions & Performance Marketing Ahmedabad',
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'KD MULTIMEDIA — 8K Cinematography & Performance Marketing Agency Ahmedabad',
     description: 'Premier 8K cinema production, Adobe editing, and performance marketing studio in Ahmedabad, Gujarat.',
-    images: ['https://kdmultimedia.in/og-image.jpg'],
+    images: ['https://www.kdmultimedia.in/og-image.jpg'],
   },
   other: {
     'geo.region': 'IN-GJ',
@@ -110,12 +110,12 @@ export default function RootLayout({
     '@graph': [
       {
         '@type': ['LocalBusiness', 'ProfessionalService'],
-        '@id': 'https://kdmultimedia.in/#organization',
+        '@id': 'https://www.kdmultimedia.in/#organization',
         name: 'KD Multimedia',
         legalName: 'KD Multimedia Productions & Marketing',
-        url: 'https://kdmultimedia.in',
-        logo: 'https://kdmultimedia.in/kd-symbol.png',
-        image: 'https://kdmultimedia.in/og-image.jpg',
+        url: 'https://www.kdmultimedia.in',
+        logo: 'https://www.kdmultimedia.in/kd-symbol.png',
+        image: 'https://www.kdmultimedia.in/og-image.jpg',
         telephone: '+917016563129',
         email: 'kdmultimedia.co@gmail.com',
         priceRange: '₹₹₹',
@@ -229,12 +229,12 @@ export default function RootLayout({
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://kdmultimedia.in/#website',
-        url: 'https://kdmultimedia.in',
+        '@id': 'https://www.kdmultimedia.in/#website',
+        url: 'https://www.kdmultimedia.in',
         name: 'KD Multimedia',
         description: 'Ahmedabad Premier 8K Cinema Production, Adobe Video Editing & Performance Marketing Agency',
         publisher: {
-          '@id': 'https://kdmultimedia.in/#organization',
+          '@id': 'https://www.kdmultimedia.in/#organization',
         },
       },
     ],

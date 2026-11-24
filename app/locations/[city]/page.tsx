@@ -43,17 +43,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: location.metaTitle,
     description: location.metaDesc,
     alternates: {
-      canonical: `https://kdmultimedia.in/locations/${location.slug}`,
+      canonical: `https://www.kdmultimedia.in/locations/${location.slug}`,
     },
     openGraph: {
       title: location.metaTitle,
       description: location.metaDesc,
-      url: `https://kdmultimedia.in/locations/${location.slug}`,
+      url: `https://www.kdmultimedia.in/locations/${location.slug}`,
       siteName: 'KD MULTIMEDIA',
       type: 'website',
       images: [
         {
-          url: 'https://kdmultimedia.in/og-image.jpg',
+          url: 'https://www.kdmultimedia.in/og-image.jpg',
           width: 1200,
           height: 630,
           alt: `${location.city} Video Production & Digital Marketing - KD MULTIMEDIA`,
@@ -77,9 +77,9 @@ export default async function LocationCityPage({ params }: PageProps) {
     '@graph': [
       {
         '@type': 'LocalBusiness',
-        '@id': `https://kdmultimedia.in/locations/${location.slug}#localbusiness`,
+        '@id': `https://www.kdmultimedia.in/locations/${location.slug}#localbusiness`,
         name: `KD Multimedia Productions — ${location.city}`,
-        url: `https://kdmultimedia.in/locations/${location.slug}`,
+        url: `https://www.kdmultimedia.in/locations/${location.slug}`,
         telephone: '+917016563129',
         priceRange: '₹₹₹',
         address: {
@@ -97,7 +97,7 @@ export default async function LocationCityPage({ params }: PageProps) {
         parentOrganization: {
           '@type': 'Organization',
           name: 'KD Multimedia Productions',
-          url: 'https://kdmultimedia.in',
+          url: 'https://www.kdmultimedia.in',
         },
       },
       {
@@ -107,19 +107,19 @@ export default async function LocationCityPage({ params }: PageProps) {
             '@type': 'ListItem',
             position: 1,
             name: 'Home',
-            item: 'https://kdmultimedia.in',
+            item: 'https://www.kdmultimedia.in',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Gujarat Regional Hubs',
-            item: 'https://kdmultimedia.in/locations',
+            item: 'https://www.kdmultimedia.in/locations',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: location.city,
-            item: `https://kdmultimedia.in/locations/${location.slug}`,
+            item: `https://www.kdmultimedia.in/locations/${location.slug}`,
           },
         ],
       },

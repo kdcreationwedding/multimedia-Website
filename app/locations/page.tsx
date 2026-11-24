@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   description:
     'KD MULTIMEDIA operates across major commercial hubs in Gujarat: Ahmedabad, Gandhinagar (GIFT City), Surat, Vadodara, and Rajkot. 8K Video Production & Performance Ads.',
   alternates: {
-    canonical: 'https://kdmultimedia.in/locations',
+    canonical: 'https://www.kdmultimedia.in/locations',
   },
   openGraph: {
     title: 'Gujarat Regional Production Hubs | KD MULTIMEDIA',
     description: 'Serving Ahmedabad, Gandhinagar, Surat, Vadodara & Rajkot with 8K Cinema & Meta Ads.',
-    url: 'https://kdmultimedia.in/locations',
+    url: 'https://www.kdmultimedia.in/locations',
     siteName: 'KD MULTIMEDIA',
     type: 'website',
   },

@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   description:
     'Expert articles on 8K commercial video production, Meta Ads scaling, corporate filmmaking, and brand strategy in Ahmedabad, Gujarat, and India.',
   alternates: {
-    canonical: 'https://kdmultimedia.in/blog',
+    canonical: 'https://www.kdmultimedia.in/blog',
   },
   openGraph: {
     title: 'KD MULTIMEDIA Production & Marketing Insights',
     description: 'Expert playbooks on 8K cinema, Meta Ads, and brand dominance.',
-    url: 'https://kdmultimedia.in/blog',
+    url: 'https://www.kdmultimedia.in/blog',
     siteName: 'KD MULTIMEDIA',
     type: 'website',
   },

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Service Not Found | KD Multimedia' };
   }
 
-  const pageUrl = `https://kdmultimedia.in/services/${service.slug}`;
+  const pageUrl = `https://www.kdmultimedia.in/services/${service.slug}`;
 
   return {
     title: service.metaTitle,
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       images: [
         {
-          url: 'https://kdmultimedia.in/og-image.jpg',
+          url: 'https://www.kdmultimedia.in/og-image.jpg',
           width: 1200,
           height: 630,
           alt: service.h1,
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: service.metaTitle,
       description: service.metaDesc,
-      images: ['https://kdmultimedia.in/og-image.jpg'],
+      images: ['https://www.kdmultimedia.in/og-image.jpg'],
     },
   };
 }
@@ -91,19 +91,19 @@ export default async function ServicePage({ params }: Props) {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://kdmultimedia.in',
+        item: 'https://www.kdmultimedia.in',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Services',
-        item: 'https://kdmultimedia.in/services',
+        item: 'https://www.kdmultimedia.in/services',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: service.title,
-        item: `https://kdmultimedia.in/services/${service.slug}`,
+        item: `https://www.kdmultimedia.in/services/${service.slug}`,
       },
     ],
   };
@@ -116,7 +116,7 @@ export default async function ServicePage({ params }: Props) {
       '@type': 'LocalBusiness',
       name: 'KD Multimedia Productions',
       telephone: '+917016563129',
-      url: 'https://kdmultimedia.in',
+      url: 'https://www.kdmultimedia.in',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Ahmedabad',

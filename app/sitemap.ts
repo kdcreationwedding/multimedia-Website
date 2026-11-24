@@ -4,7 +4,7 @@ import { locationsData } from '@/data/locationsData';
 import { blogData } from '@/data/blogData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://kdmultimedia.in';
+  const baseUrl = 'https://www.kdmultimedia.in';
   const now = new Date();
 
   // 20 Service Pages

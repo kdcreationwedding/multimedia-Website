@@ -93,7 +93,7 @@ ${formData.message || 'Not specified'}
             '@type': 'ContactPage',
             name: 'Contact KD Multimedia Productions',
             description: 'Direct contact desk for 8K commercial shooting, video editing, and performance marketing inquiries in Ahmedabad.',
-            url: 'https://kdmultimedia.in/contact',
+            url: 'https://www.kdmultimedia.in/contact',
             mainEntity: {
               '@type': 'LocalBusiness',
               name: 'KD Multimedia',

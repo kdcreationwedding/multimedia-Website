@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     'Commercial Photography Studio Ahmedabad',
   ],
   alternates: {
-    canonical: 'https://kdmultimedia.in/services',
+    canonical: 'https://www.kdmultimedia.in/services',
   },
 };
 
