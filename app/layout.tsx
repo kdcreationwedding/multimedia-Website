@@ -43,6 +43,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://kdmultimedia.in',
   },
+  verification: {
+    google: 'sNiOkkjJDtkFA8enRV9OO49mwq7C1CY5E7ltnPZi-Og',
+  },
   robots: {
     index: true,
     follow: true,
@@ -228,6 +231,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <meta name="google-site-verification" content="sNiOkkjJDtkFA8enRV9OO49mwq7C1CY5E7ltnPZi-Og" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
