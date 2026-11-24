@@ -2,12 +2,13 @@
 
 import React from 'react';
 import UniqueArrow from './UniqueArrow';
-import { UserCheck, Award, ShieldCheck, Mail } from 'lucide-react';
+import { UserCheck, Award, ShieldCheck, Mail, Sparkles, Star } from 'lucide-react';
 
 interface Founder {
   name: string;
   roleTitle: string;
   roleSub: string;
+  badge: string;
   bio: string;
   highlights: string[];
   image: string;
@@ -20,6 +21,7 @@ export default function FoundersSection() {
       name: 'MR. MAHESH',
       roleTitle: 'FOUNDER & DIRECTOR',
       roleSub: 'CHIEF EXECUTIVE OFFICER & CREATIVE DIRECTOR',
+      badge: 'DIRECTOR // 8K CINEMA & AI VISION',
       bio: 'Leading KD Multimedia Productions with relentless focus on studio vision, 8K cinema direction, generative AI integration, and high-impact brand storytelling.',
       highlights: ['8K Cinema Direction', 'Generative AI Architecture', 'Film & Commercial Direction', 'Strategic Brand Scaling'],
       image: '/founder-mahesh.jpg?v=1',
@@ -29,6 +31,7 @@ export default function FoundersSection() {
       name: 'MR. HARSHAD CHAVDA',
       roleTitle: 'CO-FOUNDER & MANAGING DIRECTOR',
       roleSub: 'HEAD OF COMMERCIAL SHOOTS & PHOTO EDITING',
+      badge: 'HEAD // 8K SHOOTING & PHOTO EDITING',
       bio: 'Managing on-location 8K commercial video shoots, camera crew unit coordination, and high-end commercial photo editing & beauty retouching.',
       highlights: ['Commercial Video Shooting', 'On-Location Camera Unit', 'Commercial Photo Editing', 'High-End Image Retouching'],
       image: '/founder-harshad.jpg?v=1',
@@ -38,6 +41,7 @@ export default function FoundersSection() {
       name: 'MR. ANIKET VAGHELA',
       roleTitle: 'CO-FOUNDER & MANAGING DIRECTOR',
       roleSub: 'CHIEF OPERATING OFFICER & STUDIO MANAGING HEAD',
+      badge: 'HEAD // STUDIO OPERATIONS & GOVERNANCE',
       bio: 'The central operational pillar of KD Multimedia. Overseeing all studio operations, end-to-end project execution, department governance (Shooting, Editing, Marketing), and overall studio management.',
       highlights: ['Overall Studio Management', 'Complete Project Supervision', 'Cross-Department Governance', 'Executive Operations Head'],
       image: '/founder-aniket.jpg?v=1',
@@ -87,15 +91,21 @@ export default function FoundersSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-obsidian-deep/90 via-transparent to-transparent pointer-events-none" />
                   
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-obsidian/80 border border-gold/40 text-[9px] font-mono text-gold-light uppercase flex items-center gap-1.5">
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-obsidian/90 border border-gold/40 text-[9px] font-mono text-gold-light uppercase flex items-center gap-1.5 backdrop-blur-md shadow-lg">
                     <ShieldCheck className="w-3 h-3 text-gold" />
                     <span>EXECUTIVE BOARD</span>
+                  </div>
+
+                  <div className="absolute bottom-3 left-3 right-3 px-3 py-1.5 rounded-xl bg-obsidian-deep/90 border border-gold/40 text-[9px] font-mono text-gold font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5">
+                    <Star className="w-3 h-3 text-gold fill-current" />
+                    <span>{founder.badge}</span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="text-xs font-mono text-gold uppercase tracking-widest font-bold">
-                    {founder.roleTitle}
+                  <div className="text-xs font-mono text-gold uppercase tracking-widest font-bold flex items-center gap-2">
+                    <Sparkles className="w-3.5 h-3.5 text-gold" />
+                    <span>{founder.roleTitle}</span>
                   </div>
                   <h3 className="text-2xl font-display font-extrabold text-white uppercase tracking-wide">
                     {founder.name}

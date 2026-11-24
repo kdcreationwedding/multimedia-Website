@@ -2,36 +2,37 @@
 
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import KDLogo from './KDLogo';
 import UniqueArrow from './UniqueArrow';
-import { Mail, Phone, Send, CheckCircle } from 'lucide-react';
+import KDLogo from './KDLogo';
+import { Mail, Phone, MapPin, Send, MessageCircle, Clock, ShieldCheck, X } from 'lucide-react';
 
 export default function Contact() {
-  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    company: '',
-    budget: '₹1,00,000 — ₹2,50,000',
-    service: 'Meta Ads (Facebook & Instagram Ads)',
+    service: 'Full-Stack Web/App Development',
+    budget: '₹1L - ₹3L',
     message: '',
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Lock body scroll and listen for ESC key when Inquiry Modal is open
+  // Lock body scroll and listen for ESC key when Contact Modal is open
   useEffect(() => {
-    if (isInquiryOpen) {
+    if (isModalOpen) {
       document.body.style.overflow = 'hidden';
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape' || e.key === 'Esc') {
-          setIsInquiryOpen(false);
+          setIsModalOpen(false);
         }
       };
 
@@ -45,269 +46,289 @@ export default function Contact() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isInquiryOpen]);
+  }, [isModalOpen]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
 
-    const mailtoSubject = encodeURIComponent(`New Inquiry from ${formData.name} (${formData.company || 'Individual'})`);
-    const mailtoBody = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nBudget: ${formData.budget}\nService: ${formData.service}\n\nMessage:\n${formData.message}`
-    );
+    const whatsappMessage = 
+`*NEW PROJECT INQUIRY // KD MULTIMEDIA*
 
-    window.open(`mailto:kdmultimedia.co@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
+👤 *Client Name:* ${formData.name}
+📱 *Phone / WhatsApp:* ${formData.phone}
+📧 *Email:* ${formData.email}
+🎯 *Service Required:* ${formData.service}
+💰 *Estimated Budget:* ${formData.budget}
+📝 *Project Details / Vision:*
+${formData.message || 'Not specified'}
 
+---
+⚡ *Sent directly via kdmultimedia.in Inquiry Form*`;
+
+    const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const encoded = encodeURIComponent(whatsappMessage);
+    const phone = '917016563129';
+
+    if (isMobile) {
+      window.location.href = `whatsapp://send?phone=${phone}&text=${encoded}`;
+      setTimeout(() => {
+        window.location.href = `https://wa.me/${phone}?text=${encoded}`;
+      }, 1000);
+    } else {
+      window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`, '_blank');
+    }
+
+    // Send to backend API
+    fetch('/api/inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    }).catch((err) => console.error('Inquiry background sync error:', err));
+
+    setIsSubmitting(false);
+    setIsSuccess(true);
     setTimeout(() => {
-      setSubmitted(false);
-      setIsInquiryOpen(false);
-    }, 3000);
+      setIsSuccess(false);
+      setIsModalOpen(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: 'Full-Stack Web/App Development',
+        budget: '₹1L - ₹3L',
+        message: '',
+      });
+    }, 2500);
   };
 
-  const modalContent = isInquiryOpen && (
+  const modalContent = isModalOpen && (
     <div
       onClick={(e) => {
-        // Close if backdrop clicked outside modal
         if (e.target === e.currentTarget) {
-          setIsInquiryOpen(false);
+          setIsModalOpen(false);
         }
       }}
-      className="fixed inset-0 z-[9999999] bg-obsidian-deep flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+      className="fixed inset-0 z-[9999999] bg-obsidian-deep/98 backdrop-blur-3xl flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
     >
-      <div className="bg-obsidian-surface border border-gold/50 p-6 sm:p-8 md:p-12 rounded-3xl max-w-2xl w-full relative shadow-[0_0_120px_rgba(212,175,55,0.4)] animate-fade-in my-auto">
+      <div className="bg-obsidian-surface border border-gold/50 p-6 sm:p-8 md:p-12 rounded-3xl max-w-2xl w-full relative shadow-[0_0_140px_rgba(212,175,55,0.4)] animate-fade-in my-auto">
+        {/* Prominent Top-Right Close Button */}
         <button
-          onClick={() => setIsInquiryOpen(false)}
-          className="absolute top-6 right-6 text-slate-400 hover:text-white font-mono text-xs px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 hover:border-gold/50 transition-colors"
+          onClick={() => setIsModalOpen(false)}
+          className="absolute top-6 right-6 text-slate-300 hover:text-white font-mono text-xs px-4 py-2 rounded-full border border-gold/40 bg-gold/10 hover:bg-gold hover:text-obsidian transition-all flex items-center gap-1.5 shadow-lg group z-20"
         >
-          CLOSE [ESC / X]
+          <X className="w-4 h-4 text-gold group-hover:text-obsidian" />
+          <span>CLOSE [ESC]</span>
         </button>
 
-        {submitted ? (
-          <div className="py-16 text-center space-y-4">
-            <CheckCircle className="w-16 h-16 text-gold mx-auto animate-bounce" />
-            <h3 className="text-3xl font-display font-bold text-white uppercase">
-              INQUIRY TRANSMITTED
-            </h3>
-            <p className="text-sm font-mono text-slate-300">
-              Your mail app has been launched to send your details to <span className="text-gold">kdmultimedia.co@gmail.com</span>. Our team will get back to you shortly!
+        <div className="text-center space-y-3 mb-8">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono text-gold-light uppercase">
+            <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+            <span>DIRECT EXECUTIVE DESK</span>
+          </div>
+          <h3 className="text-3xl font-display font-extrabold text-white uppercase">
+            INITIATE PROJECT <span className="text-metallic-gold font-light">BRIEF</span>
+          </h3>
+          <p className="text-xs font-mono text-slate-300">
+            Submit your requirements. Our creative directors respond within 2 hours.
+          </p>
+        </div>
+
+        {isSuccess ? (
+          <div className="p-8 rounded-2xl bg-gold/10 border border-gold/40 text-center space-y-4 animate-fade-in">
+            <div className="w-12 h-12 rounded-full bg-gold text-obsidian mx-auto flex items-center justify-center font-bold text-xl">
+              ✓
+            </div>
+            <h4 className="text-xl font-display font-extrabold text-gold uppercase">BRIEF SENT TO WHATSAPP</h4>
+            <p className="text-xs font-mono text-slate-200">
+              Thank you {formData.name}! Your inquiry has been sent to our WhatsApp desk (+91 70165 63129). Mr. Mahesh & the executive team will respond immediately.
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 text-left font-mono text-xs">
             <div>
-              <h3 className="text-2xl font-display font-extrabold text-white uppercase tracking-wide">
-                INITIATE A PROJECT INQUIRY
-              </h3>
-              <p className="text-xs font-mono text-gold-light mt-1">
-                DIRECT EMAIL: KDMULTIMEDIA.CO@GMAIL.COM | CALL: +91 90330 32926
-              </p>
+              <label className="block text-slate-400 mb-1">FULL NAME *</label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Enter your name"
+                className="w-full bg-obsidian border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold"
+              />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                  YOUR NAME *
-                </label>
+                <label className="block text-slate-400 mb-1">EMAIL ADDRESS *</label>
                 <input
-                  required
-                  type="text"
-                  placeholder="Your Full Name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
-                />
-              </div>
-
-              <div>
-                <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                  EMAIL ADDRESS *
-                </label>
-                <input
-                  required
                   type="email"
-                  placeholder="your.email@company.com"
+                  required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
+                  placeholder="name@company.com"
+                  className="w-full bg-obsidian border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold"
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                  MOBILE / PHONE NUMBER *
-                </label>
+                <label className="block text-slate-400 mb-1">PHONE / WHATSAPP *</label>
                 <input
-                  required
                   type="tel"
-                  placeholder="+91 90330 32926"
+                  required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
+                  placeholder="+91 70165 63129"
+                  className="w-full bg-obsidian border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold"
                 />
-              </div>
-
-              <div>
-                <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                  COMPANY / BRAND NAME
-                </label>
-                <input
-                  type="text"
-                  placeholder="Brand Name"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                  SELECT CAPABILITY
-                </label>
-                <select
-                  value={formData.service}
-                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                  className="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
-                >
-                  <option value="Meta Ads (Facebook & Instagram Ads)">Meta Ads (Facebook & Instagram Ads)</option>
-                  <option value="Google Ads & Performance Max (PMax)">Google Ads & Performance Max (PMax)</option>
-                  <option value="SEO & Search Engine Dominance">SEO & Search Engine Dominance</option>
-                  <option value="AI Integration & Generative Production">AI Integration & Generative Production</option>
-                  <option value="SaaS & 3D Product Animation">SaaS & 3D Product Animation</option>
-                  <option value="Commercial & Product Photography">Commercial & Product Photography</option>
-                  <option value="Professional Videography & TV Commercials">Professional Videography & TV Commercials</option>
-                  <option value="Video Editing & Motion FX">Video Editing & Motion FX</option>
-                  <option value="Instagram Reels & Viral Short-Form">Instagram Reels & Viral Short-Form</option>
-                  <option value="YouTube Ecosystem & Channel Growth">YouTube Ecosystem & Channel Growth</option>
-                  <option value="Social Media Management">Social Media Management</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                  ESTIMATED BUDGET (IN INR)
-                </label>
-                <select
-                  value={formData.budget}
-                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                  className="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
-                >
-                  <option value="₹1,00,000 — ₹2,50,000">₹1,00,000 — ₹2,50,000 (₹1 L – ₹2.5 L)</option>
-                  <option value="₹2,50,000 — ₹5,00,000">₹2,50,000 — ₹5,00,000 (₹2.5 L – ₹5 L)</option>
-                  <option value="₹5,00,000 — ₹10,00,000">₹5,00,000 — ₹10,00,000 (₹5 L – ₹10 L)</option>
-                  <option value="₹10,00,000+">₹10,00,000+ (₹10 Lakhs+)</option>
-                </select>
               </div>
             </div>
 
             <div>
-              <label className="text-[10px] font-mono uppercase text-slate-400 block mb-2">
-                PROJECT VISION & DETAILS
-              </label>
+              <label className="block text-slate-400 mb-1">PRIMARY SERVICE REQUIRED</label>
+              <select
+                value={formData.service}
+                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                className="w-full bg-obsidian border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold"
+              >
+                <option value="Full-Stack Web/App Development">Full-Stack Web/App Development</option>
+                <option value="AI Integration & Generative Video">AI Integration & Generative Video</option>
+                <option value="8K Commercial Video Shooting">8K Commercial Video Shooting</option>
+                <option value="Commercial Photo Shooting & Editing">Commercial Photo Shooting & Editing</option>
+                <option value="Meta & Google Ads Campaign">Meta & Google Ads Campaign</option>
+                <option value="Instagram Reels & Short-Form">Instagram Reels & Short-Form</option>
+                <option value="Luxury Wedding (KD Creation)">Luxury Wedding (KD Creation)</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-slate-400 mb-1">PROJECT DETAILS / VISION</label>
               <textarea
-                rows={4}
-                placeholder="Describe your goals or project requirements..."
+                rows={3}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold font-sans"
+                placeholder="Briefly describe your production or marketing goals..."
+                className="w-full bg-obsidian border border-gold/30 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-4 rounded-xl bg-metallic-gold text-obsidian font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-90 shadow-lg"
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-xl bg-metallic-gold text-obsidian font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-xl"
             >
-              <Send className="w-4 h-4" />
-              <span>SEND INQUIRY TO KDMULTIMEDIA.CO@GMAIL.COM</span>
+              {isSubmitting ? (
+                <span>OPENING WHATSAPP...</span>
+              ) : (
+                <>
+                  <MessageCircle className="w-4 h-4 text-obsidian" />
+                  <span>SUBMIT & SEND VIA WHATSAPP (+91 70165 63129)</span>
+                  <UniqueArrow direction="right" />
+                </>
+              )}
             </button>
           </form>
         )}
+
+        {/* Prominent Bottom Close Button */}
+        <button
+          onClick={() => setIsModalOpen(false)}
+          className="w-full mt-4 py-3 rounded-xl bg-obsidian border border-gold/40 text-gold font-bold text-xs uppercase tracking-widest hover:bg-gold hover:text-obsidian transition-colors flex items-center justify-center gap-2"
+        >
+          <X className="w-4 h-4" />
+          <span>CLOSE INQUIRY FORM [ESC]</span>
+        </button>
       </div>
     </div>
   );
 
   return (
-    <section id="contact" className="relative min-h-screen w-full py-36 px-6 md:px-12 z-10 flex flex-col items-center justify-center text-center overflow-hidden">
-      {/* Background Radial Glow */}
-      <div className="absolute w-[800px] h-[800px] bg-gradient-radial from-gold/15 via-gold/5 to-transparent blur-[160px] pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto w-full relative z-10 space-y-12">
-        {/* The KD Orbit locks precisely around this centered KD Logo */}
-        <div className="inline-flex flex-col items-center justify-center p-8 md:p-12 rounded-full bg-glass border border-gold/40 shadow-[0_0_60px_rgba(212,175,55,0.3)] animate-pulse-glow">
-          <KDLogo size="hero" showText={true} layout="vertical" animated={true} />
-        </div>
-
-        <div className="space-y-4">
-          <div className="text-xs font-mono tracking-[0.4em] text-gold-light uppercase">
-            10 // FINAL CLIMAX & INQUIRY
+    <section id="contact" className="relative min-h-screen w-full py-28 md:py-36 px-6 md:px-12 z-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-[10px] font-mono text-gold-light uppercase tracking-widest">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span>12 // FINAL CLIMAX & DIRECT INQUIRY</span>
           </div>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-extrabold tracking-tight uppercase text-white leading-tight">
-            LET'S CREATE SOMETHING <br />
-            <span className="text-metallic-gold font-light tracking-wide text-glow">
-              IMPOSSIBLE TO IGNORE.
-            </span>
+          <h2 className="text-4xl md:text-8xl font-display font-extrabold uppercase text-white tracking-tight">
+            LET&apos;S CREATE <span className="text-metallic-gold font-light">SOMETHING ICONIC</span>
           </h2>
+          <p className="text-sm font-mono text-slate-300 tracking-wider">
+            Ready to elevate your brand with 8K cinema production, Adobe Creative Suite editing, or high-ROAS Meta ads?
+          </p>
         </div>
 
-        {/* Direct Contact Info Bar (Email & Phone) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto w-full pt-4">
-          {/* Email Direct Contact Card */}
-          <a
-            href="mailto:kdmultimedia.co@gmail.com"
-            className="group p-5 rounded-2xl bg-glass border border-white/10 hover:border-gold/60 backdrop-blur-xl transition-all duration-300 flex items-center justify-between text-left"
-            data-cursor="EMAIL US"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-obsidian transition-colors">
-                <Mail className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono tracking-widest text-slate-400 uppercase">
-                  DIRECT EMAIL INQUIRY
-                </div>
-                <div className="text-sm font-mono font-bold text-white group-hover:text-gold-light transition-colors">
-                  kdmultimedia.co@gmail.com
-                </div>
-              </div>
-            </div>
-            <UniqueArrow direction="up-right" className="group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </a>
+        {/* Floating Official KD Emblem Lockup */}
+        <div className="relative my-16 py-10 flex flex-col items-center justify-center">
+          <div className="relative flex items-center justify-center animate-float">
+            <img
+              src="/kd-symbol.png"
+              alt="KD MULTIMEDIA Official Emblem"
+              className="w-40 h-40 md:w-56 md:h-56 object-contain filter drop-shadow-[0_0_60px_rgba(212,175,55,0.8)] hover:scale-105 transition-transform duration-700"
+            />
+          </div>
 
-          {/* Phone Direct Contact Card */}
-          <a
-            href="tel:+919033032926"
-            className="group p-5 rounded-2xl bg-glass border border-white/10 hover:border-gold/60 backdrop-blur-xl transition-all duration-300 flex items-center justify-between text-left"
-            data-cursor="CALL US"
-          >
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-obsidian transition-colors">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono tracking-widest text-slate-400 uppercase">
-                  DIRECT PHONE / WHATSAPP
-                </div>
-                <div className="text-sm font-mono font-bold text-white group-hover:text-gold-light transition-colors">
-                  +91 90330 32926
-                </div>
-              </div>
+          {/* Compact Floating Text Lockup below Emblem */}
+          <div className="mt-6 text-center space-y-2 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold/10 border border-gold/30 text-[9px] font-mono text-gold-light uppercase tracking-widest mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              <span>AHMEDABAD SOUNDSTAGE DESK: LIVE (IST)</span>
             </div>
-            <UniqueArrow direction="up-right" className="group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </a>
+
+            <div className="text-2xl md:text-4xl font-display font-extrabold tracking-widest text-white uppercase text-glow-white">
+              KD MULTIMEDIA
+            </div>
+
+            {/* Laser Line Divider Lockup */}
+            <div className="flex items-center justify-center gap-3 pt-1">
+              <span className="h-[1px] w-12 bg-gold/60" />
+              <span className="text-[11px] font-mono tracking-[0.35em] text-metallic-gold font-bold uppercase">
+                PRODUCTION & MARKETING
+              </span>
+              <span className="h-[1px] w-12 bg-gold/60" />
+            </div>
+          </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
-          <button
-            onClick={() => setIsInquiryOpen(true)}
-            className="group relative px-10 py-5 rounded-full overflow-hidden border border-gold bg-metallic-gold text-obsidian font-bold text-xs sm:text-sm uppercase tracking-[0.25em] shadow-[0_0_40px_rgba(212,175,55,0.4)] transition-all duration-500 hover:scale-105 flex items-center gap-3"
-            data-cursor="START"
-          >
-            <span>SUBMIT DETAILED INQUIRY →</span>
-          </button>
+        {/* Central Action CTA Buttons & Quick Desk */}
+        <div className="max-w-3xl mx-auto space-y-8 text-center pt-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="w-full sm:w-auto px-10 py-5 rounded-full bg-metallic-gold text-obsidian font-bold text-xs md:text-sm uppercase tracking-[0.25em] flex items-center justify-center gap-3 hover:scale-105 transition-transform shadow-[0_0_40px_rgba(212,175,55,0.4)]"
+            >
+              <span>INITIATE PROJECT BRIEF</span>
+              <UniqueArrow direction="right" />
+            </button>
+
+            <a
+              href={`https://wa.me/917016563129?text=${encodeURIComponent(
+                'Hello KD MULTIMEDIA, I would like to inquire about 8K cinema production, Adobe editing, or digital marketing services.'
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-8 py-5 rounded-full bg-glass border border-gold/40 text-gold font-bold text-xs md:text-sm uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gold hover:text-obsidian transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>WHATSAPP DESK (+91 70165 63129)</span>
+            </a>
+          </div>
+
+          {/* Quick Desk Contact Info Bar */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-white/10 text-xs font-mono">
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center gap-3">
+              <Phone className="w-4 h-4 text-gold" />
+              <span className="text-slate-200">+91 70165 63129</span>
+            </div>
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center gap-3">
+              <Mail className="w-4 h-4 text-gold" />
+              <span className="text-slate-200">kdmultimedia.co@gmail.com</span>
+            </div>
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center gap-3">
+              <MapPin className="w-4 h-4 text-gold" />
+              <span className="text-slate-200">Ahmedabad, Gujarat, India</span>
+            </div>
+          </div>
         </div>
       </div>
 

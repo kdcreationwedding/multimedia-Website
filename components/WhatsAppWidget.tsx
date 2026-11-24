@@ -7,8 +7,8 @@ import { MessageCircle, Phone, Mail, X } from 'lucide-react';
 export default function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const phone = '9033032926';
-  const whatsappUrl = `https://wa.me/919033032926?text=${encodeURIComponent(
+  const phone = '7016563129';
+  const whatsappUrl = `https://wa.me/917016563129?text=${encodeURIComponent(
     'Hello KD MULTIMEDIA, I would like to inquire about production & digital marketing services.'
   )}`;
 
@@ -48,7 +48,7 @@ export default function WhatsAppWidget() {
                 </div>
                 <div>
                   <div className="text-[9px] font-mono text-slate-400 uppercase">WHATSAPP CHAT</div>
-                  <div className="text-xs font-mono font-bold text-white">+91 90330 32926</div>
+                  <div className="text-xs font-mono font-bold text-white">+91 70165 63129</div>
                 </div>
               </div>
               <UniqueArrow direction="up-right" />
@@ -65,7 +65,7 @@ export default function WhatsAppWidget() {
                 </div>
                 <div>
                   <div className="text-[9px] font-mono text-slate-400 uppercase">DIRECT PHONE</div>
-                  <div className="text-xs font-mono font-bold text-white">+91 90330 32926</div>
+                  <div className="text-xs font-mono font-bold text-white">+91 70165 63129</div>
                 </div>
               </div>
               <UniqueArrow direction="up-right" />

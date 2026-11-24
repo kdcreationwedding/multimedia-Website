@@ -9,7 +9,7 @@ import UniqueArrow from '@/components/UniqueArrow';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
 import AudioEngine from '@/components/AudioEngine';
 import KeyShortcutHandler from '@/components/KeyShortcutHandler';
-import { Mail, Phone, Send, CheckCircle, Clock } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle, Clock, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -27,15 +27,52 @@ export default function ContactPage() {
     e.preventDefault();
     setSubmitted(true);
 
-    const mailtoSubject = encodeURIComponent(`New Inquiry from ${formData.name} (${formData.company || 'Individual'})`);
-    const mailtoBody = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nBudget: ${formData.budget}\nService: ${formData.service}\n\nMessage:\n${formData.message}`
-    );
+    const whatsappMessage = 
+`*NEW PROJECT INQUIRY // KD MULTIMEDIA*
 
-    window.open(`mailto:kdmultimedia.co@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
+👤 *Client Name:* ${formData.name}
+📱 *Phone / WhatsApp:* ${formData.phone}
+📧 *Email:* ${formData.email}
+🏢 *Company / Brand:* ${formData.company || 'N/A'}
+🎯 *Service Required:* ${formData.service}
+💰 *Estimated Budget:* ${formData.budget}
+📝 *Project Vision & Goals:*
+${formData.message || 'Not specified'}
+
+---
+⚡ *Sent directly via kdmultimedia.in/contact*`;
+
+    const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const encoded = encodeURIComponent(whatsappMessage);
+    const phone = '917016563129';
+
+    if (isMobile) {
+      window.location.href = `whatsapp://send?phone=${phone}&text=${encoded}`;
+      setTimeout(() => {
+        window.location.href = `https://wa.me/${phone}?text=${encoded}`;
+      }, 1000);
+    } else {
+      window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`, '_blank');
+    }
+
+    // Send to backend API
+    fetch('/api/inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    }).catch((err) => console.error('Inquiry background sync error:', err));
 
     setTimeout(() => {
       setSubmitted(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        budget: '₹1,00,000 — ₹2,50,000',
+        service: 'Meta Ads (Facebook & Instagram Ads)',
+        message: '',
+      });
     }, 4000);
   };
 
@@ -93,7 +130,7 @@ export default function ContactPage() {
 
             {/* Phone / WhatsApp Card */}
             <a
-              href="tel:+919033032926"
+              href="tel:+917016563129"
               className="group p-8 rounded-3xl bg-glass border border-white/10 hover:border-gold/60 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
             >
               <div>
@@ -104,7 +141,7 @@ export default function ContactPage() {
                   PHONE / WHATSAPP DESK
                 </div>
                 <h3 className="text-xl font-mono font-bold text-white group-hover:text-gold-light transition-colors">
-                  +91 90330 32926
+                  +91 70165 63129
                 </h3>
               </div>
               <div className="pt-6 flex items-center justify-between text-xs font-mono text-gold-light">
@@ -141,7 +178,7 @@ export default function ContactPage() {
               
               <div className="pt-6 border-t border-white/10 w-full">
                 <p className="text-xs text-slate-300 font-sans font-light leading-relaxed">
-                  We combine visual production, cinema-grade filming & editing, 2D/3D SaaS animation, social growth, Meta/Google ads, and AI integration for high-growth brands.
+                  We combine visual production, full-stack web & mobile app development, cinema-grade filming & editing, 2D/3D SaaS animation, social growth, Meta/Google ads, and AI integration for high-growth brands.
                 </p>
               </div>
             </div>
@@ -153,7 +190,7 @@ export default function ContactPage() {
                   PROJECT INQUIRY FORM
                 </h2>
                 <p className="text-xs font-mono text-gold-light mt-1">
-                  DIRECT EMAIL: KDMULTIMEDIA.CO@GMAIL.COM | CALL: +91 90330 32926
+                  DIRECT WHATSAPP: +91 70165 63129 | EMAIL: KDMULTIMEDIA.CO@GMAIL.COM
                 </p>
               </div>
 
@@ -161,10 +198,10 @@ export default function ContactPage() {
                 <div className="py-16 text-center space-y-4">
                   <CheckCircle className="w-16 h-16 text-gold mx-auto animate-bounce" />
                   <h3 className="text-3xl font-display font-bold text-white uppercase">
-                    INQUIRY TRANSMITTED
+                    INQUIRY TRANSMITTED TO WHATSAPP
                   </h3>
                   <p className="text-sm font-mono text-slate-300">
-                    Your details have been submitted. Our executive team will get back to you within 24 hours.
+                    WhatsApp is opening with your project brief. Mr. Mahesh & the executive team will respond to you immediately!
                   </p>
                 </div>
               ) : (
@@ -207,7 +244,7 @@ export default function ContactPage() {
                       <input
                         required
                         type="tel"
-                        placeholder="+91 90330 32926"
+                        placeholder="+91 70165 63129"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-gold font-sans"
@@ -238,6 +275,8 @@ export default function ContactPage() {
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                         className="w-full bg-obsidian border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-gold font-sans"
                       >
+                        <option value="Full-Stack Web Development & Design">Full-Stack Web Development & Design</option>
+                        <option value="iOS & Android Mobile App Development">iOS & Android Mobile App Development</option>
                         <option value="Meta Ads (Facebook & Instagram Ads)">Meta Ads (Facebook & Instagram Ads)</option>
                         <option value="Google Ads & Performance Max (PMax)">Google Ads & Performance Max (PMax)</option>
                         <option value="SEO & Search Engine Dominance">SEO & Search Engine Dominance</option>
@@ -286,8 +325,8 @@ export default function ContactPage() {
                     type="submit"
                     className="w-full py-5 rounded-xl bg-metallic-gold text-obsidian font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg group"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>SEND INQUIRY TO KDMULTIMEDIA.CO@GMAIL.COM</span>
+                    <MessageCircle className="w-4 h-4 text-obsidian" />
+                    <span>SEND DIRECT INQUIRY VIA WHATSAPP (+91 70165 63129)</span>
                     <UniqueArrow direction="right" className="group-hover:translate-x-1" />
                   </button>
                 </form>

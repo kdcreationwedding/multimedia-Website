@@ -14,7 +14,7 @@ export default function AwardsTicker() {
     'MUMBAI • DUBAI • LONDON',
     '4.9X AVERAGE CLIENT ROAS',
     'KDMULTIMEDIA.CO@GMAIL.COM',
-    '+91 90330 32926',
+    '+91 70165 63129',
   ];
 
   return (

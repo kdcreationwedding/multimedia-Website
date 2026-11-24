@@ -2,7 +2,7 @@
 
 import React from 'react';
 import UniqueArrow from './UniqueArrow';
-import { Heart, Camera, Film, Sparkles, ExternalLink } from 'lucide-react';
+import { Heart, Camera, Film, Sparkles, ExternalLink, Award } from 'lucide-react';
 
 export default function WeddingSection() {
   const weddingServices = [
@@ -10,16 +10,19 @@ export default function WeddingSection() {
       title: 'LUXURY WEDDING CINEMATOGRAPHY',
       desc: 'Cinema-grade 4K/8K wedding films, royal teaser edits, and emotional story highlight reels.',
       icon: Film,
+      badge: 'DESTINATION WEDDING FILM REEL',
     },
     {
       title: 'CANDID & TRADITIONAL PHOTOGRAPHY',
       desc: 'High-detail wedding photography capturing raw emotions, rituals, and royal portraits.',
       icon: Camera,
+      badge: 'ROYAL RITUAL COVERAGE 8K',
     },
     {
       title: 'PRE-WEDDING CONCEPT FILMS',
       desc: 'Destination pre-wedding shoots, cinematic story concepts, and song videography.',
       icon: Heart,
+      badge: 'CONCEPT SONG VIDEOGRAPHY',
     },
   ];
 
@@ -67,12 +70,19 @@ export default function WeddingSection() {
             return (
               <div
                 key={idx}
-                className="group p-8 rounded-3xl bg-glass border border-white/10 hover:border-gold/60 backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
+                className="group p-8 rounded-3xl bg-glass border border-white/10 hover:border-gold/60 backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between space-y-6"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold mb-6 group-hover:bg-gold group-hover:text-obsidian transition-colors">
-                    <Icon className="w-6 h-6" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-obsidian transition-colors">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-[9px] font-mono text-gold-light uppercase tracking-widest font-bold flex items-center gap-1">
+                      <Sparkles className="w-3 h-3 text-gold" />
+                      <span>{service.badge}</span>
+                    </span>
                   </div>
+
                   <h3 className="text-xl font-display font-bold uppercase text-white mb-3 group-hover:text-gold-light transition-colors">
                     {service.title}
                   </h3>
@@ -83,7 +93,7 @@ export default function WeddingSection() {
 
                 <div className="pt-6 border-t border-white/5 flex items-center justify-between text-xs font-mono text-gold-light">
                   <span>KD CREATION EXCLUSIVE</span>
-                  <Sparkles className="w-4 h-4 text-gold" />
+                  <Award className="w-4 h-4 text-gold" />
                 </div>
               </div>
             );

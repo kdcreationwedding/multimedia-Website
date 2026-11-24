@@ -44,7 +44,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="tel:+919033032926"
+              href="tel:+917016563129"
               className="flex items-center gap-3 text-slate-200 hover:text-gold transition-colors font-sans pt-2"
             >
               <div className="w-8 h-8 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center text-gold">
@@ -52,7 +52,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-[9px] font-mono text-slate-400 uppercase">MOBILE / PHONE</div>
-                <div className="font-mono text-xs font-bold">+91 90330 32926</div>
+                <div className="font-mono text-xs font-bold">+91 70165 63129</div>
               </div>
             </a>
           </div>

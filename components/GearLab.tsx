@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import UniqueArrow from './UniqueArrow';
-import { Camera, Film, Monitor, Sliders, Radio } from 'lucide-react';
+import { Camera, Film, Monitor, Sliders, Radio, Sparkles, ShieldCheck } from 'lucide-react';
 
 interface GearItem {
   id: string;
@@ -76,8 +76,9 @@ export default function GearLab() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[1px] w-12 bg-gold/60" />
-              <span className="text-xs font-mono tracking-[0.35em] text-gold-light uppercase">
-                HARDWARE ARCHITECTURE
+              <span className="text-xs font-mono tracking-[0.35em] text-gold-light uppercase flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-gold" />
+                <span>07 // HARDWARE ARCHITECTURE</span>
               </span>
             </div>
             <h2 className="text-4xl md:text-7xl font-display font-extrabold tracking-tight uppercase text-white">
@@ -140,8 +141,14 @@ export default function GearLab() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian-deep via-transparent to-transparent opacity-80 pointer-events-none" />
               
-              <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-obsidian/80 border border-gold/40 text-[10px] font-mono text-gold-light uppercase pointer-events-none">
-                {current.category}
+              <div className="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-obsidian/90 border border-gold/40 text-[10px] font-mono text-gold-light uppercase pointer-events-none backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                <ShieldCheck className="w-3.5 h-3.5 text-gold" />
+                <span>{current.category}</span>
+              </div>
+
+              <div className="absolute top-4 right-4 px-3.5 py-1 rounded-full bg-gold/90 text-obsidian text-[9px] font-mono font-bold uppercase tracking-widest pointer-events-none shadow-xl flex items-center gap-1">
+                <Sparkles className="w-3 h-3 fill-current" />
+                <span>STUDIO VERIFIED HARDWARE</span>
               </div>
             </div>
 
@@ -153,8 +160,8 @@ export default function GearLab() {
                 </h3>
               </div>
               
-              <p className="text-xs font-mono text-gold-light tracking-wider uppercase">
-                {current.specs}
+              <p className="text-xs font-mono text-gold-light tracking-wider uppercase font-bold">
+                ⚡ SPECS: {current.specs}
               </p>
               
               <p className="text-slate-300 text-sm font-sans font-light leading-relaxed">

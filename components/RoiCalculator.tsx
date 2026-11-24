@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import UniqueArrow from './UniqueArrow';
-import { Calculator, Sparkles, TrendingUp, Eye } from 'lucide-react';
+import { Calculator, Sparkles, TrendingUp, Eye, Gauge } from 'lucide-react';
 
 export default function RoiCalculator() {
   const [budget, setBudget] = useState<number>(20000);
@@ -10,13 +10,14 @@ export default function RoiCalculator() {
 
   const goals = [
     'Performance Ads & Meta/Google',
+    'Web & Mobile App Ecosystem',
     'Instagram Reels Viral Engine',
     'YouTube Channel 1M Scale',
     '8K Cinema Brand Film',
   ];
 
   // Dynamic calculations based on spend in INR (₹)
-  const estimatedROAS = goal.includes('Performance') ? 4.8 : goal.includes('Reels') ? 5.2 : 4.5;
+  const estimatedROAS = goal.includes('Performance') ? 4.8 : goal.includes('Web') ? 5.0 : goal.includes('Reels') ? 5.2 : 4.5;
   const estimatedRevenue = Math.round(budget * estimatedROAS);
   const estimatedImpressions = (budget * 150).toLocaleString('en-IN');
 
@@ -96,36 +97,62 @@ export default function RoiCalculator() {
               </div>
             </div>
 
-            {/* Right Result Card */}
-            <div className="lg:col-span-6 bg-obsidian-surface p-8 rounded-2xl border border-gold/30 space-y-6 shadow-2xl">
+            {/* Right Result Card with Circular ROAS Gauge Meter */}
+            <div className="lg:col-span-6 bg-obsidian-surface p-8 rounded-2xl border border-gold/30 space-y-6 shadow-2xl relative overflow-hidden">
               <div className="text-[10px] font-mono text-gold-light uppercase tracking-widest flex items-center justify-between">
                 <span>PROJECTED METRICS OVERVIEW</span>
                 <Sparkles className="w-4 h-4 text-gold" />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-white/5 border border-white/5 space-y-1">
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-slate-400 uppercase">
-                    <TrendingUp className="w-3.5 h-3.5 text-gold" />
-                    <span>ESTIMATED ROAS</span>
-                  </div>
-                  <div className="text-3xl font-display font-extrabold text-white">
-                    {estimatedROAS}x <span className="text-xs font-mono text-gold font-normal">ROI</span>
+              {/* ROAS Circular Gauge Meter & Numbers */}
+              <div className="flex items-center justify-around p-4 rounded-2xl bg-white/5 border border-white/10">
+                {/* Circular Gauge Ring */}
+                <div className="relative w-24 h-24 flex items-center justify-center">
+                  <svg className="w-full h-full transform -rotate-90">
+                    <circle cx="48" cy="48" r="38" stroke="rgba(255,255,255,0.1)" strokeWidth="8" fill="transparent" />
+                    <circle
+                      cx="48"
+                      cy="48"
+                      r="38"
+                      stroke="#d4af37"
+                      strokeWidth="8"
+                      strokeDasharray="238"
+                      strokeDashoffset={238 - (238 * (estimatedROAS / 6))}
+                      strokeLinecap="round"
+                      fill="transparent"
+                      className="transition-all duration-700 ease-out"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center font-mono">
+                    <span className="text-xl font-bold text-white">{estimatedROAS}x</span>
+                    <span className="text-[9px] text-gold uppercase">ROAS</span>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-white/5 border border-white/5 space-y-1">
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-slate-400 uppercase">
-                    <Eye className="w-3.5 h-3.5 text-gold" />
-                    <span>ESTIMATED REACH</span>
+                <div className="space-y-2">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400 uppercase">
+                      <Eye className="w-3.5 h-3.5 text-gold" />
+                      <span>ESTIMATED REACH</span>
+                    </div>
+                    <div className="text-xl font-display font-extrabold text-metallic-gold">
+                      {estimatedImpressions}
+                    </div>
                   </div>
-                  <div className="text-2xl font-display font-extrabold text-metallic-gold">
-                    {estimatedImpressions}
+
+                  <div className="space-y-1 pt-1">
+                    <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400 uppercase">
+                      <Gauge className="w-3.5 h-3.5 text-gold" />
+                      <span>CONVERSION RATE</span>
+                    </div>
+                    <div className="text-sm font-mono font-bold text-white">
+                      3.8% – 5.2% ESTIMATED
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-gold/10 border border-gold/30 text-center space-y-1">
+              <div className="p-5 rounded-xl bg-gold/10 border border-gold/30 text-center space-y-1 shadow-xl">
                 <div className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
                   PROJECTED CAMPAIGN REVENUE RETURN
                 </div>

@@ -1,10 +1,23 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import UniqueArrow from './UniqueArrow';
-import { Bot } from 'lucide-react';
+import { Bot, Sparkles } from 'lucide-react';
 
 export default function Hero() {
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const xPercentage = (e.clientX / window.innerWidth) * 100;
+      const yPercentage = (e.clientY / window.innerHeight) * 100;
+      setMousePos({ x: xPercentage, y: yPercentage });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const handleScrollClick = () => {
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
@@ -14,15 +27,22 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen w-full flex flex-col justify-between items-center px-6 md:px-12 pt-36 pb-12 overflow-hidden z-10">
-      {/* Background Subtle Volumetric Light Radial */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-gold/10 via-obsidian/5 to-transparent blur-[120px] pointer-events-none" />
+      {/* Interactive Mouse-Follow Anamorphic Lens Flare Layer */}
+      <div
+        className="absolute w-[600px] h-[600px] bg-gradient-radial from-gold/15 via-gold/5 to-transparent blur-[140px] pointer-events-none transition-all duration-300 ease-out"
+        style={{
+          left: `${mousePos.x}%`,
+          top: `${mousePos.y}%`,
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
 
       <div className="w-full max-w-7xl mx-auto flex-1 flex flex-col items-center justify-center text-center relative z-10 my-auto">
         {/* Editorial AI & Production Sub-badge */}
         <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-glass-gold border border-gold/20 mb-8 backdrop-blur-md animate-float">
           <Bot className="w-4 h-4 text-gold animate-pulse" />
           <span className="text-[10px] md:text-xs font-mono tracking-[0.35em] text-gold-light uppercase">
-            AI INTEGRATION MASTERY • CREATIVE PRODUCTION • DIGITAL MARKETING
+            WEB & APP DEV • AI INTEGRATION • CREATIVE PRODUCTION • DIGITAL MARKETING
           </span>
         </div>
 
@@ -58,7 +78,7 @@ export default function Hero() {
           <span className="text-gold">01</span>
           <span>// EST. 2026</span>
         </div>
-        <div className="hidden sm:block">AI INTEGRATION • CINEMATOGRAPHY • PERFORMANCE MARKETING</div>
+        <div className="hidden sm:block">WEB & APP DEV • AI INTEGRATION • CINEMATOGRAPHY • PERFORMANCE MARKETING</div>
         <div className="flex items-center gap-2">
           <span>SCROLL TO EXPLORE</span>
           <div className="w-4 h-8 rounded-full border border-slate-600 flex items-start justify-center p-1">
