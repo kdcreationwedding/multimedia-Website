@@ -20,10 +20,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'SERVICES', href: '/services' },
+    { name: 'SERVICES', href: '/#services' },
     { name: 'PORTFOLIO', href: '/#portfolio' },
-    { name: 'LOCATIONS', href: '/locations' },
-    { name: 'INSIGHTS', href: '/blog' },
+    { name: 'GEAR LAB', href: '/#gear' },
     { name: 'CONTACT US', href: '/contact' },
   ];
 
