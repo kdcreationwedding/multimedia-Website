@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AwardsTicker from "@/components/AwardsTicker";
@@ -23,9 +24,20 @@ import AudioEngine from "@/components/AudioEngine";
 import KeyShortcutHandler from "@/components/KeyShortcutHandler";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 
+export const metadata: Metadata = {
+  verification: {
+    google: 'sNiOkkjJDtkFA8enRV9OO49mwq7C1CY5E7ltnPZi-Og',
+  },
+};
+
 export default function Home() {
   return (
     <main className="relative bg-obsidian text-white overflow-x-hidden font-sans selection:bg-gold/30 selection:text-obsidian">
+      {/* Invisible Google Site Verification Tag (Completely hidden from visitors, read by Googlebot) */}
+      <head>
+        <meta name="google-site-verification" content="sNiOkkjJDtkFA8enRV9OO49mwq7C1CY5E7ltnPZi-Og" />
+      </head>
+
       {/* 3D WebGL Canvas Layer */}
       <KDOrbitCanvas />
 
