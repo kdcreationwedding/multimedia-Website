@@ -57,15 +57,25 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Social Links */}
+          {/* Social & SEO Quick Links */}
           <div className="md:col-span-3 space-y-4 text-xs">
             <div className="text-slate-500 uppercase tracking-widest text-[10px] mb-2">
+              SEO DIRECTORY & NETWORK
+            </div>
+            <div className="flex flex-col space-y-2 text-zinc-400 font-sans text-xs">
+              <a href="/services" className="hover:text-gold transition-colors">All 20 Services Hub</a>
+              <a href="/locations" className="hover:text-gold transition-colors">Gujarat Regional Hubs</a>
+              <a href="/blog" className="hover:text-gold transition-colors">Insights & Industry Journal</a>
+              <a href="/contact" className="hover:text-gold transition-colors">Contact Production Desk</a>
+            </div>
+
+            <div className="text-slate-500 uppercase tracking-widest text-[10px] pt-2 mb-2">
               CONNECT & FOLLOW
             </div>
             <div className="flex items-center gap-3">
               {[
-                { name: 'Instagram', icon: Instagram, href: '#' },
-                { name: 'YouTube', icon: Youtube, href: '#' },
+                { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/kdmultimedia' },
+                { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@kdmultimedia' },
                 { name: 'LinkedIn', icon: Linkedin, href: '#' },
                 { name: 'Twitter', icon: Twitter, href: '#' },
               ].map((social) => {
