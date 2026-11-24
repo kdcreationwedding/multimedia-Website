@@ -84,6 +84,33 @@ ${formData.message || 'Not specified'}
       <WhatsAppWidget />
       <Navbar />
 
+      {/* ContactPage Schema.org Microdata */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact KD Multimedia Productions',
+            description: 'Direct contact desk for 8K commercial shooting, video editing, and performance marketing inquiries in Ahmedabad.',
+            url: 'https://kdmultimedia.in/contact',
+            mainEntity: {
+              '@type': 'LocalBusiness',
+              name: 'KD Multimedia',
+              telephone: '+917016563129',
+              email: 'kdmultimedia.co@gmail.com',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Ahmedabad',
+                addressRegion: 'Gujarat',
+                postalCode: '380001',
+                addressCountry: 'IN',
+              },
+            },
+          }),
+        }}
+      />
+
       <section className="relative pt-40 pb-24 px-6 md:px-12 z-10">
         <div className="max-w-7xl mx-auto space-y-16">
           {/* Header */}

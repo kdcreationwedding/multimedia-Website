@@ -3,29 +3,61 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kdmultimedia.in'),
-  title: 'KD MULTIMEDIA — 8K Cinematography, Production & Performance Marketing Agency Ahmedabad',
+  title: 'KD MULTIMEDIA — 8K Cinematography, Video Production & Meta Ads Agency Ahmedabad',
   description:
-    'KD MULTIMEDIA is Ahmedabad’s premier 8K cinema production and performance marketing agency. Specializing in commercial video shooting, Adobe Creative Suite editing (Premiere Pro & After Effects), Meta/Google ads & luxury weddings (KD Creation).',
+    'KD MULTIMEDIA is Ahmedabad’s premier 8K cinema production and performance marketing agency. Specializing in commercial video shooting, Adobe Creative Suite editing (Premiere Pro & After Effects), Meta & Google ads, 3D animations, and luxury destination weddings (KD Creation). Call: +91 70165 63129.',
   keywords: [
     'KD MULTIMEDIA',
     'KD Creation',
-    'Wedding Photographer Ahmedabad',
-    'Commercial Videography Ahmedabad',
-    'Pre Wedding Photographer Ahmedabad',
-    '8K Cinema Shooting',
-    'Adobe Premiere Pro Editing',
-    'After Effects Motion FX',
+    'Video Production Company in Ahmedabad',
+    'Commercial Video Shoot Ahmedabad',
+    '8K Cinema Shooting Ahmedabad',
+    'Product Photography Ahmedabad',
+    'Best Video Editing Studio Ahmedabad',
+    'Adobe Premiere Pro Editor Ahmedabad',
+    'After Effects Motion Graphics Studio Ahmedabad',
     'Meta Ads Agency Ahmedabad',
-    'Google Ads Performance Marketing',
-    'Multimedia Production Agency Gujarat',
+    'Facebook Ads Agency Ahmedabad',
+    'Instagram Reels Viral Video Agency Ahmedabad',
+    'Google Ads Agency Ahmedabad',
+    'Performance Marketing Agency Gujarat',
+    'Corporate Film Maker Ahmedabad',
+    'TV Commercial Production House Gujarat',
+    'Luxury Wedding Cinematography Ahmedabad',
+    'Destination Wedding Photographer Gujarat',
+    'Pre Wedding Shoot Ahmedabad',
+    'Drone Videography Services Ahmedabad',
+    'Full Stack Web Development Ahmedabad',
+    'SaaS Product Animation Video Gujarat',
+    'Commercial Ad Film Maker Ahmedabad',
+    'Brand Filmmaker Gujarat',
+    'Fashion Photography Studio Ahmedabad',
   ],
+  authors: [
+    { name: 'Mr. Mahesh', url: 'https://kdmultimedia.in' },
+    { name: 'Mr. Harshad Chavda' },
+    { name: 'Mr. Aniket Vaghela' },
+  ],
+  creator: 'KD MULTIMEDIA Productions',
+  publisher: 'KD MULTIMEDIA Productions & Marketing',
   alternates: {
     canonical: 'https://kdmultimedia.in',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
     title: 'KD MULTIMEDIA — 8K Cinematography, Production & Performance Marketing Agency Ahmedabad',
     description:
-      'Ultra-premium 8K cinema production, Adobe Creative Suite post-production, and high-ROAS Meta & Google ads agency in Ahmedabad, Gujarat.',
+      'Ultra-premium 8K cinema production, Adobe Creative Suite post-production, high-ROAS Meta & Google ads, and luxury destination weddings in Ahmedabad, Gujarat. Phone: +91 70165 63129.',
     url: 'https://kdmultimedia.in',
     siteName: 'KD MULTIMEDIA',
     locale: 'en_IN',
@@ -42,8 +74,14 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'KD MULTIMEDIA — 8K Cinematography & Performance Marketing Agency Ahmedabad',
-    description: 'Premier 8K cinema production and performance marketing studio in Ahmedabad, Gujarat.',
+    description: 'Premier 8K cinema production, Adobe editing, and performance marketing studio in Ahmedabad, Gujarat.',
     images: ['https://kdmultimedia.in/og-image.jpg'],
+  },
+  other: {
+    'geo.region': 'IN-GJ',
+    'geo.placename': 'Ahmedabad',
+    'geo.position': '23.0225;72.5714',
+    'ICBM': '23.0225, 72.5714',
   },
 };
 
@@ -56,52 +94,135 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@graph': [
       {
-        "@type": "LocalBusiness",
-        "@id": "https://kdmultimedia.in/#organization",
-        "name": "KD Multimedia",
-        "legalName": "KD Multimedia Productions & Marketing",
-        "url": "https://kdmultimedia.in",
-        "logo": "https://kdmultimedia.in/kd-symbol.png",
-        "image": "https://kdmultimedia.in/og-image.jpg",
-        "telephone": "+917016563129",
-        "email": "kdmultimedia.co@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Ahmedabad",
-          "addressRegion": "Gujarat",
-          "postalCode": "380001",
-          "addressCountry": "IN"
+        '@type': ['LocalBusiness', 'ProfessionalService'],
+        '@id': 'https://kdmultimedia.in/#organization',
+        name: 'KD Multimedia',
+        legalName: 'KD Multimedia Productions & Marketing',
+        url: 'https://kdmultimedia.in',
+        logo: 'https://kdmultimedia.in/kd-symbol.png',
+        image: 'https://kdmultimedia.in/og-image.jpg',
+        telephone: '+917016563129',
+        email: 'kdmultimedia.co@gmail.com',
+        priceRange: '₹₹₹',
+        currenciesAccepted: 'INR',
+        paymentAccepted: 'Cash, Credit Card, Bank Transfer, UPI',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Ahmedabad Soundstage Studio Hub',
+          addressLocality: 'Ahmedabad',
+          addressRegion: 'Gujarat',
+          postalCode: '380001',
+          addressCountry: 'IN',
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "23.0225",
-          "longitude": "72.5714"
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: '23.0225',
+          longitude: '72.5714',
         },
-        "priceRange": "₹₹₹",
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "09:00",
-            "closes": "20:00"
-          }
+        areaServed: [
+          { '@type': 'City', name: 'Ahmedabad' },
+          { '@type': 'City', name: 'Gandhinagar' },
+          { '@type': 'City', name: 'Vadodara' },
+          { '@type': 'City', name: 'Surat' },
+          { '@type': 'City', name: 'Rajkot' },
+          { '@type': 'AdministrativeArea', name: 'Gujarat' },
+          { '@type': 'City', name: 'Mumbai' },
+          { '@type': 'Country', name: 'India' },
         ],
-        "sameAs": [
-          "https://www.instagram.com/kdmultimedia",
-          "https://www.youtube.com/@kdmultimedia",
-          "https://kdcreations.in"
-        ]
+        founder: [
+          {
+            '@type': 'Person',
+            name: 'Mr. Mahesh',
+            jobTitle: 'Founder & Creative Director',
+          },
+          {
+            '@type': 'Person',
+            name: 'Mr. Harshad Chavda',
+            jobTitle: 'Co-Founder & Head of Commercial Shoots',
+          },
+          {
+            '@type': 'Person',
+            name: 'Mr. Aniket Vaghela',
+            jobTitle: 'Co-Founder & Chief Operating Officer',
+          },
+        ],
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          bestRating: '5',
+          ratingCount: '138',
+        },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '09:00',
+            closes: '20:00',
+          },
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'KD Multimedia Production & Marketing Services',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: '8K Commercial Video Shooting & Film Production',
+                description: 'Full-frame 8K cinema camera rigs, anamorphic optics, 4K FPV drone footage, and soundstage lighting for TV commercials and brand films.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Adobe Creative Suite Post-Production & Color Grading',
+                description: 'Adobe Premiere Pro multitrack editing, After Effects 2D/3D kinetic motion graphics, and DaVinci Resolve HDR color grading.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Meta Ads & Google Performance Marketing',
+                description: 'Direct-response Meta Advantage+ Shopping Campaigns (ASC), Google Performance Max (PMax), and high-converting video creative funnels.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'KD Creation Luxury Wedding Cinematography',
+                description: 'Royal destination wedding films, candid photography, concept pre-wedding teasers, and drone coverage across Gujarat and India.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Commercial Product Photography & Retouching',
+                description: '360 studio turntable product photography, e-commerce catalog shoots, and high-end beauty and texture retouching.',
+              },
+            },
+          ],
+        },
+        sameAs: [
+          'https://www.instagram.com/kdmultimedia',
+          'https://www.youtube.com/@kdmultimedia',
+          'https://kdcreations.in',
+        ],
       },
       {
-        "@type": "WebSite",
-        "@id": "https://kdmultimedia.in/#website",
-        "url": "https://kdmultimedia.in",
-        "name": "KD Multimedia",
-        "publisher": {
-          "@id": "https://kdmultimedia.in/#organization"
-        }
-      }
-    ]
+        '@type': 'WebSite',
+        '@id': 'https://kdmultimedia.in/#website',
+        url: 'https://kdmultimedia.in',
+        name: 'KD Multimedia',
+        description: 'Ahmedabad Premier 8K Cinema Production, Adobe Video Editing & Performance Marketing Agency',
+        publisher: {
+          '@id': 'https://kdmultimedia.in/#organization',
+        },
+      },
+    ],
   };
 
   return (
